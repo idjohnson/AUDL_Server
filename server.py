@@ -143,6 +143,24 @@ class Handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 self.end_headers()
 
             self.wfile.write(path_data(self.path,AUDL))
+            
+    def do_POST(self):
+        # Extract and print the contents of the POST
+        length = int(self.headers['Content-Length'])
+        post_data = urlparse.parse_qs(self.rfile.read(length).decode('utf-8'))
+        
+        for key, value in post_data.iteritems():
+            if key == 'ID':
+                idnum = str(value)[3:-2]
+            if key == 'email':
+                email = str(value)[3:-2]
+            print "%s=%s" % (key, value)
+
+        device_ids.add_id(idnum, email)
+        device_ids.write_to_file()
+        self.send_response(200)
+        self.send_header("Content-type", "text/html")
+        self.end_headers()
 
 # Initialize the league class
 AUDL = AUDLclasses.League()

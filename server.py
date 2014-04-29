@@ -150,10 +150,10 @@ class Handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         post_data = urlparse.parse_qs(self.rfile.read(length).decode('utf-8'))
         
         for key, value in post_data.iteritems():
-            if key == 'ID':
-                idnum = str(value)[3:-2]
+            if key == 'regID':
+                idnum = value
             if key == 'email':
-                email = str(value)[3:-2]
+                email = value
             print "%s=%s" % (key, value)
 
         device_ids.add_id(idnum, email)

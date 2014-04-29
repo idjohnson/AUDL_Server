@@ -6,6 +6,7 @@ import json
 import image_get as ig
 import youtube as yt
 import threading
+import device_ids
 
 # Parse a given input path to the server
 def path_parse(path):
@@ -33,7 +34,8 @@ def path_data(path, League):
                    'Stats'     : League.get_top_fives(),
                    'FAQ'       : "Coming soon",
                    'Terms_and_Info' : "Coming soon",
-                   'Home'      : (League.news_page_info(),League.get_videos(),League.return_upcoming())}
+                   'Home'      : (League.news_page_info(),League.get_videos(),League.return_upcoming())
+                  }
 
 
     path_ents = path_parse(path)
@@ -155,9 +157,9 @@ class Handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             if key == 'email':
                 email = value
             print "%s=%s" % (key, value)
-
-        device_ids.add_id(idnum, email)
-        device_ids.write_to_file()
+        dids.append([idnum, email])
+        #device_ids.add_id(idnum, email)
+        #device_ids.write_to_file()
         self.send_response(200)
         self.send_header("Content-type", "text/html")
         self.end_headers()
@@ -170,6 +172,7 @@ AUDL = AUDLclasses.League()
 AUDL.add_teams('Teams_Info')
 # Get news articles for the team
 AUDL.get_news()
+dids = []
 
 
 def main():

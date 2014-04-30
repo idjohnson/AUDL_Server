@@ -30,13 +30,13 @@ def send_gcm_msg(dids, msg):
 				print "Removing %s because %s" % (reg_id, err_code)
 
 			#if some reg ids have recoverably failed
-			for res.needs_retry():
+			#for res.needs_retry():
 				#construct new message with only failed regids
-				retry_msg = res.retry()
+				#retry_msg = res.retry()
 				#you have to wait before attempting again. delay()
 				#will tell you how long to wait depending on your
 				#current retry counter, starting from 0.
-				print "Wait or schedule task after %s seconds" % res.delay(retry)
+				#print "Wait or schedule task after %s seconds" % res.delay(retry)
 				#retry += 1 and send retry_msg again
 
 	catch GCMAuthenticationError:

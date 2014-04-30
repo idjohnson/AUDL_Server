@@ -18,7 +18,7 @@ def send_gcm_msg(dids, msg):
 				print "Successfully send %s as %s" % (reg_id, msg_id)
 
 			#update your registration ID's
-			for reg_id, new_reg_id res.canonical_items():
+			for reg_id, new_reg_id in res.canonical_items():
 				print "Replacing %s with %s in id list" % (reg_id, new_reg_id)
 
 			#probably app uninstalled

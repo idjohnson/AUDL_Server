@@ -2,7 +2,7 @@ import urllib
 import urllib2
 
 url = 'http://localhost:4000'
-post_dict = {'ID' : 185982529582123,
+post_dict = {'regID' : "185982529582123",
              'email' : "johnnieDoe@example.com" }
 
 params = urllib.urlencode(post_dict)

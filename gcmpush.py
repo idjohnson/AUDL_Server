@@ -39,12 +39,12 @@ def send_gcm_msg(dids, msg):
 				#print "Wait or schedule task after %s seconds" % res.delay(retry)
 				#retry += 1 and send retry_msg again
 
-	catch GCMAuthenticationError:
+	except GCMAuthenticationError:
 		# stop and fix your settings
 		print "Your Google API key is rejected"
-	catch ValueError, e:
+	except ValueError, e:
 		#probably your extra options are invalid read error for more info.
 		print "Invalid message/option or invalid GCM response"
-	catch Exception:
+	except Exception:
 		#your network is down or proxy settings broken. retry when fixed
 		print "Something wrong with requests library"

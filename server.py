@@ -163,7 +163,8 @@ class Handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             if key == 'email':
                 email = value
             print "%s=%s" % (key, value)
-        dids.append([idnum, email])
+        didsnmail.append([idnum, email])
+        dids.append(idnum)
         #device_ids.add_id(idnum, email)
         #device_ids.write_to_file()
         self.send_response(200)
@@ -178,6 +179,7 @@ AUDL = AUDLclasses.League()
 AUDL.add_teams('Teams_Info')
 # Get news articles for the team
 AUDL.get_news()
+didsnmail = []
 dids = []
 
 

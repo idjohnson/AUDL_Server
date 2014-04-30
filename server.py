@@ -8,6 +8,7 @@ import youtube as yt
 import threading
 import device_ids
 import urlparse
+import gcmpush
 
 # Parse a given input path to the server
 def path_parse(path):
@@ -165,6 +166,8 @@ class Handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             print "%s=%s" % (key, value)
         didsnmail.append([idnum, email])
         dids.append(idnum)
+        #strictly for testing our gcmpush as of now
+        gcmpush.send_gcm_msg(dids, "Radicals: 1 Wind Chill: 2")
         #device_ids.add_id(idnum, email)
         #device_ids.write_to_file()
         self.send_response(200)

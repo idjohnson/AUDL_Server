@@ -7,6 +7,7 @@ import image_get as ig
 import youtube as yt
 import threading
 import device_ids
+import urlparse
 
 # Parse a given input path to the server
 def path_parse(path):
@@ -129,6 +130,10 @@ def game_graph(team,path_ents):
     else:
         return "No graph available for this game"
 
+def get_dids():
+    print dids
+    return dids
+
 class Handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
     def do_GET(self):
@@ -150,7 +155,8 @@ class Handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         # Extract and print the contents of the POST
         length = int(self.headers['Content-Length'])
         post_data = urlparse.parse_qs(self.rfile.read(length).decode('utf-8'))
-        
+        idnum = ""
+        email = ""
         for key, value in post_data.iteritems():
             if key == 'regID':
                 idnum = value
@@ -186,7 +192,7 @@ def main():
     httpd.serve_forever()
 
 def refresh():
-    print "refreshing server...",
+    print "refreshing server...gcm_notifications branch",
     threading.Timer(60,refresh).start()
     AUDL.update_games()
     AUDL.get_news()

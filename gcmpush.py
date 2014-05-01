@@ -11,21 +11,22 @@ def send_gcm_msg(dids, msg):
 	#ready to hand to multicast
 	for info in dids:
 		for i in range(0, len(info), 2):
-		   deviceids.append(data[i][0]):
+		   deviceids.append(info[i][0])
 
 
 	
 	#construct our key=>message payload, do not use nested structures.
 	data = {'msg': msg, 'int': 10 }
 	unicast = PlainTextMessage(dids[0], data, dry_run=False)
-	#multicast = JSONMessage(deviceids, data, collapse_key='my.key', dry_run=False)
+	multicast = JSONMessage(deviceids, data, collapse_key='my.key', dry_run=False)
 
 	try:
 		#attempt send
 		res_unicast = gcm.send(unicast)
+		res_multicast = gcm.send(multicast)
 		#res_multicast = gcm.send(multicast)
 		#for res in [res_unicast, res_multicast]:
-		for res in [res_unicast]:
+		for res in [res_unicast, res_multicast]:
 			#nothing to do on success
 			for reg_id, msg_id in res.success.items():
 				print "Successfully sent %s as %s" % (reg_id, msg_id)

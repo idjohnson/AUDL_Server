@@ -2,7 +2,9 @@ from gcmclient import *
 
 #our API KEY, should be secured
 API_KEY = "AIzaSyBgwklrw5nMnsFXdFTIpBT0VsSl72OjOAE"
+
 gcm = GCM(API_KEY)
+
 deviceids = []
 def send_gcm_msg(dids, msg):
 	#niravs regid
@@ -22,16 +24,15 @@ def send_gcm_msg(dids, msg):
 
 	
 	#construct our key=>message payload, do not use nested structures.
-	data = {'msg': msg, 'int': 10 }
-	#unicast = PlainTextMessage(dids[0], data, dry_run=False)
+	data = { 'msg': msg }
+
 	multicast = JSONMessage(deviceids, data, collapse_key='my.key', dry_run=False)
 
 	try:
 		#attempt send
-		#res_unicast = gcm.send(unicast)
 		res_multicast = gcm.send(multicast)
-		#for res in [res_unicast, res_multicast]:
-		for res in [res_multicast]:
+
+		for res in res_multicast:
 			#nothing to do on success
 			for reg_id, msg_id in res.success.items():
 				print "Successfully sent %s as %s" % (reg_id, msg_id)
@@ -52,13 +53,13 @@ def send_gcm_msg(dids, msg):
 				print "Removing %s because %s" % (reg_id, err_code)
 
 			#if some reg ids have recoverably failed
-			if res.needs_retry():
+			#if res.needs_retry():
 				#construct new message with only failed regids
-				#retry_msg = res.retry()
+			#	retry_msg = res.retry()
 				#you have to wait before attempting again. delay()
 				#will tell you how long to wait depending on your
 				#current retry counter, starting from 0.
-				print "Wait or schedule task after seconds"
+			#	print "Wait or schedule task after seconds"
 				#retry += 1 and send retry_msg again
 
 	except GCMAuthenticationError:

@@ -6,7 +6,7 @@ gcm = GCM(API_KEY)
 deviceids = []
 def send_gcm_msg(dids, msg):
 	#niravs regid
-	#deviceids.append("APA91bEBXXNfQNgcUil1phi21dxNXPU1xtQkHnkAHoJe6ga0N6QbkdK9tTBq78oE88PcDNcVhDT13E_i4P15kaLKRmI5CotF-xUcjD7w9l-gENyTx6nEh03RZ1uGSAp4CzK9wDS627dfuGe7z24ffho4b5YwshzKRTrUDrvjfkXtpEaFKVc2bzc")
+	deviceids.append("APA91bEBXXNfQNgcUil1phi21dxNXPU1xtQkHnkAHoJe6ga0N6QbkdK9tTBq78oE88PcDNcVhDT13E_i4P15kaLKRmI5CotF-xUcjD7w9l-gENyTx6nEh03RZ1uGSAp4CzK9wDS627dfuGe7z24ffho4b5YwshzKRTrUDrvjfkXtpEaFKVc2bzc")
 
 
 
@@ -37,14 +37,17 @@ def send_gcm_msg(dids, msg):
 				print "Successfully sent %s as %s" % (reg_id, msg_id)
 
 			#update your registration ID's
+			#need to implement
 			for reg_id, new_reg_id in res.canonical.items():
 				print "Replacing %s with %s in id list" % (reg_id, new_reg_id)
 
 			#probably app uninstalled
+			#implement removal
 			for reg_id in res.not_registered:
 				print "Removing %s from id list" % reg_id
 
 			#unrecoverably failed, these ID's will not be retried
+			#implement removal
 			for reg_id, err_code in res.failed.items():
 				print "Removing %s because %s" % (reg_id, err_code)
 
@@ -64,9 +67,9 @@ def send_gcm_msg(dids, msg):
 	except ValueError, e:
 		#probably your extra options are invalid read error for more info.
 		print "Invalid message/option or invalid GCM response"
-	#except Exception:
-	#	#your network is down or proxy settings broken. retry when fixed
-	#	print "Something wrong with requests library"
+	except Exception:
+		#your network is down or proxy settings broken. retry when fixed
+		print "Something wrong with requests library"
 
 def getIDs( ):
 	return deviceids

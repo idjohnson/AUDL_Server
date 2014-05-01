@@ -167,7 +167,8 @@ class Handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         didsnmail.append([idnum, email])
         #dids.append(idnum)
         #strictly for testing our gcmpush as of now
-        gcmpush.send_gcm_msg(didsnmail, "Radicals: 1 Wind Chill: 2")
+        #can be triggered with "post_test.py"
+        gcmpush.send_gcm_msg(didsnmail, "Madison: 1 Minnesota: 1")
         #device_ids.add_id(idnum, email)
         #device_ids.write_to_file()
         self.send_response(200)

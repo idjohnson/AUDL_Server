@@ -4,10 +4,17 @@ API_KEY = "AIzaSyBgwklrw5nMnsFXdFTIpBT0VsSl72OjOAE"
 gcm = GCM(API_KEY)
 
 def send_gcm_msg(dids, msg):
-	#dids comes in a format ["device id", "emailaddress"], 
-	#so grab every other string starting at 0
-	deviceids = dids[0::2]
+	#dids comes in a format [[["device id"], ["emailaddress"]],[["device id"], ["emailaddress"]]]
+	#so grab every other device id starting at 0
+	deviceids = []
+	#after this loop deviceids is ["regid1", "regid2"] format
+	#ready to hand to multicast
+	for info in dids:
+		for i in range(0, len(info), 2):
+		   deviceids.append(data[i][0]):
 
+
+	
 	#construct our key=>message payload, do not use nested structures.
 	data = {'msg': msg, 'int': 10 }
 	unicast = PlainTextMessage(dids[0], data, dry_run=False)

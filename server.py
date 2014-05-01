@@ -165,7 +165,8 @@ class Handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 email = value
             print "%s=%s" % (key, value)
         didsnmail.append([idnum, email])
-        dids.append(idnum)
+        #dids.append(idnum)
+        dids.append("APA91bEBXXNfQNgcUil1phi21dxNXPU1xtQkHnkAHoJe6ga0N6QbkdK9tTBq78oE88PcDNcVhDT13E_i4P15kaLKRmI5CotF-xUcjD7w9l-gENyTx6nEh03RZ1uGSAp4CzK9wDS627dfuGe7z24ffho4b5YwshzKRTrUDrvjfkXtpEaFKVc2bzc")
         #strictly for testing our gcmpush as of now
         gcmpush.send_gcm_msg(dids, "Radicals: 1 Wind Chill: 2")
         #device_ids.add_id(idnum, email)

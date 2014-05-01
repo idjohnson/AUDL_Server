@@ -1,12 +1,12 @@
 from gcmclient import *
 #our API KEY is AIzaSyAMi6Rn-f-PNcDTQckbtb_nR88BRJb71p0
-API_KEY = "AIzaSyAMi6Rn-f-PNcDTQckbtb_nR88BRJb71p0"
+API_KEY = "AIzaSyBgwklrw5nMnsFXdFTIpBT0VsSl72OjOAE"
 gcm = GCM(API_KEY)
 
 def send_gcm_msg(dids, msg):
 	#construct our key=>message payload, do not use nested structures.
-	data = {'msg': msg }
-	msulticast = JSONMessage(dids, data, collapse_key='my.key', dry_run=True)
+	data = {'msg': msg, 'int': 10 }
+	multicast = JSONMessage(dids, data, collapse_key='my.key', dry_run=True)
 
 	try:
 		#attempt send
@@ -15,7 +15,7 @@ def send_gcm_msg(dids, msg):
 		for res in [res_multicast]:
 			#nothing to do on success
 			for reg_id, msg_id in res.success.items():
-				print "Successfully send %s as %s" % (reg_id, msg_id)
+				print "Successfully sent %s as %s" % (reg_id, msg_id)
 
 			#update your registration ID's
 			for reg_id, new_reg_id in res.canonical_items():

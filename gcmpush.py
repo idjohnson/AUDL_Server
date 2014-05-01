@@ -4,10 +4,14 @@ API_KEY = "AIzaSyBgwklrw5nMnsFXdFTIpBT0VsSl72OjOAE"
 gcm = GCM(API_KEY)
 
 def send_gcm_msg(dids, msg):
+	#dids comes in a format ["device id", "emailaddress"], 
+	#so grab every other string starting at 0
+	deviceids = dids[0::2]
+
 	#construct our key=>message payload, do not use nested structures.
 	data = {'msg': msg, 'int': 10 }
 	unicast = PlainTextMessage(dids[0], data, dry_run=False)
-	#multicast = JSONMessage(dids, data, collapse_key='my.key', dry_run=False)
+	#multicast = JSONMessage(deviceids, data, collapse_key='my.key', dry_run=False)
 
 	try:
 		#attempt send

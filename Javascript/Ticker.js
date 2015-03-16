@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$.ajax({
-		url: "http://ec2-54-86-111-95.compute-1.amazonaws.com:4000/Web/Scores",
+		url: "http://ec2-54-86-111-95.compute-1.amazonaws.com:4001/Web/Scores",
 		jsonp: "callback",
 		dataType : "jsonp",
 		jsonpCallback : "getTicker"
@@ -24,10 +24,10 @@ getTicker = function( data ) {
 	$.each( parsedData, function( i, gamesArray ) {
 		tickerText += '<li class="ticker-item"><table width="100px"><tr>';
 		tickerText += '<td>' + gamesArray[i,"hteam"].substr(0,3) + '</td>';
-		tickerText += '<td>' + gamesArray[i,"hscore"] + '</td>';
+		tickerText += '<td>' + gamesArray[i,"home_score"] + '</td>';
 		tickerText += '</tr><tr>';
 		tickerText += '<td>' + gamesArray[i,"ateam"].substr(0,3) + '</td>';
-		tickerText += '<td>' + gamesArray[i,"ascore"] + '</td>';
+		tickerText += '<td>' + gamesArray[i,"away_score"] + '</td>';
 		
 		tickerText += '</tr></table></li>';
 	})
